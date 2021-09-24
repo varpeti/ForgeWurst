@@ -81,11 +81,40 @@ public final class FreecamHack extends Hack
 		player.motionZ = 0;
 
 		player.onGround = false;
-		player.jumpMovementFactor = speed.getValueF();
+		player.jumpMovementFactor = 0;//speed.getValueF();
 
 		if(mc.gameSettings.keyBindJump.isKeyDown()) player.motionY += speed.getValue();
 		if(mc.gameSettings.keyBindSneak.isKeyDown()) player.motionY -= speed.getValue();
 
+		double rot = deg2rad(player.rotationYaw);
+		int add = 0;
+
+		if(mc.gameSettings.keyBindForward.isKeyDown()) {
+			player.motionX = Math.cos(rot-Math.PI/2) * -speed.getValue();
+			player.motionZ = Math.sin(rot-Math.PI/2) * -speed.getValue();
+			add++;
+		}
+		if(mc.gameSettings.keyBindBack.isKeyDown()) {
+			player.motionX += Math.cos(rot-Math.PI/2) * speed.getValue();
+			player.motionZ += Math.sin(rot-Math.PI/2) * speed.getValue();
+			add++;
+		}
+
+		if(mc.gameSettings.keyBindRight.isKeyDown()) {
+			player.motionX += Math.cos(rot) * -speed.getValue();
+			player.motionZ += Math.sin(rot) * -speed.getValue();
+			add++;
+		}
+		if(mc.gameSettings.keyBindLeft.isKeyDown()) {
+			player.motionX += Math.cos(rot) * speed.getValue();
+			player.motionZ += Math.sin(rot) * speed.getValue();
+			add++;
+		}
+
+		if (add > 1) {
+			player.motionX /= add;
+			player.motionZ /= add;
+		}
 	}
 	
 	@SubscribeEvent
