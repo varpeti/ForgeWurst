@@ -65,6 +65,7 @@ public final class HackList extends WHackList
 	public final TimerHack timerHack = register(new TimerHack());
 	public final TunnellerHack tunnellerHack = register(new TunnellerHack());
 	public final XRayHack xRayHack = register(new XRayHack());
+	public final FindBlocksHack findBlocksHack = register(new FindBlocksHack());
 	
 	private final Path enabledHacksFile;
 	private final Path settingsFile;

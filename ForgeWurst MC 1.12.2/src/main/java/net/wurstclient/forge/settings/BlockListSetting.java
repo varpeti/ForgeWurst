@@ -42,6 +42,14 @@ public final class BlockListSetting extends Setting
 	{
 		this(name, null, blocks);
 	}
+
+	public BlockListSetting(String name, String description, String... blocks)
+	{
+		super(name, description);
+
+		Arrays.stream(blocks).parallel().distinct().sorted().forEachOrdered(s -> blockNames.add(s));
+		defaultNames = blockNames.toArray(new String[0]);
+	}
 	
 	public List<String> getBlockNames()
 	{

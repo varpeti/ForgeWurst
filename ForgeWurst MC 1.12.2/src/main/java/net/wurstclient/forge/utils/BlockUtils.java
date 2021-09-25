@@ -51,6 +51,11 @@ public final class BlockUtils
 	{
 		return "" + Block.REGISTRY.getNameForObject(block);
 	}
+
+	public static String getName(BlockPos pos)
+	{
+		return "" + Block.REGISTRY.getNameForObject(getState(pos).getBlock());
+	}
 	
 	public static Material getMaterial(BlockPos pos)
 	{
