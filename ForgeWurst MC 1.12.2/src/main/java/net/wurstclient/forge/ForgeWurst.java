@@ -27,7 +27,7 @@ import net.wurstclient.forge.clickgui.ClickGui;
 public final class ForgeWurst
 {
 	public static final String MODID = "forgewurst";
-	public static final String VERSION = "vp0.1";
+	public static final String VERSION = "0.12";
 	
 	@Instance(MODID)
 	private static ForgeWurst forgeWurst;
