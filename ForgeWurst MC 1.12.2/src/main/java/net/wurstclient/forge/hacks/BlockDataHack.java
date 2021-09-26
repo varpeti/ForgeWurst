@@ -36,6 +36,8 @@ public final class BlockDataHack extends Hack
 	private final CheckboxSetting unlocalizedName = new CheckboxSetting("Unlocalized name", false);
 	private final CheckboxSetting metadata = new CheckboxSetting("Technical name with Metadata", false);
 
+	String text;
+
 	public BlockDataHack()
 	{
 		super("Block Data",
@@ -67,7 +69,7 @@ public final class BlockDataHack extends Hack
 			BlockPos pos = lookingAt.getBlockPos();
 			Block block = BlockUtils.getBlock(pos);
 			IBlockState state = BlockUtils.getState(pos);
-			String text = "";
+			text = "";
 			if (technicalName.isChecked())
 				text += BlockUtils.getName(pos) + " ";
 			if (localizedName.isChecked())
@@ -76,25 +78,14 @@ public final class BlockDataHack extends Hack
 				text += block.getUnlocalizedName() + " ";
 			if (metadata.isChecked())
 				text += state.toString() + " ";
-
-			setText(text);
 			return;
 		}
-		setText("");
+		text = "";
 	}
 
-	private void setText(String text)
+	@Override
+	public String getRenderName()
 	{
-		try
-		{
-			Field name = Hack.class.getDeclaredField("name");
-			name.setAccessible(true);
-			name.set(this, "Block Data (" + text + ")");
-
-		}catch(ReflectiveOperationException e)
-		{
-			setEnabled(false);
-			throw new RuntimeException(e);
-		}
+		return getName() + "( " + text + ")";
 	}
 }
